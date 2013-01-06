@@ -3,42 +3,53 @@
   <head>
     <title>Acceleration Example</title>
 	<meta charset="utf-8">
-	<!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>	
 body {margin:0; padding:0;}
 </style>
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
-	<script type="text/javascript" charset="utf-8" src="kapiszon.js"></script>
     <script type="text/javascript" charset="utf-8">
-var ctx=null;
-    // Wait for PhoneGap to load
-    //
-	
-	    function onLoad() {
-			try  {document.addEventListener("deviceready", onDeviceReady, false);}
-			catch(er){onDeviceReady();}
-			onDeviceReady();
-		}
-	
-   
 
+    // The watch id references the current `watchAcceleration`
+    var watchID = null;
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
     function onDeviceReady() {
-		//console.log('device redy');
-		var int=window.setInterval(function(){odczyt(ctx)},2000);
-		//odczyt();
-		
+        startWatch();
     }
 
-	function odczyt(){
-		try {navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);}
-		catch(er){rysuj(null)}
+    // Start watching the acceleration
+    //
+    function startWatch() {
 
-	} 
-	
+        // Update acceleration every 3 seconds
+        var options = { frequency: 3000 };
+
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    }
+
+    // Stop watching the acceleration
+    //
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+
+    // onSuccess: Get a snapshot of the current acceleration
+    //
     function onSuccess(acceleration) {
-    	$('#test2').innerHTML='X: '+ acceleration.x +'<br />Y: '+ acceleration.y+'<br />Z: '+acceleration.z+'<br />T: '+ acceleration.timestamp;
-		rysyj(acceleration);
- 		//window.setTimeout(odczyt(),700);
+        var element = document.getElementById('accelerometer');
+        element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
+                            'Acceleration Y: ' + acceleration.y + '<br />' +
+                            'Acceleration Z: ' + acceleration.z + '<br />' +
+                            'Timestamp: '      + acceleration.timestamp + '<br />';
     }
 
     // onError: Failed to get the acceleration
@@ -47,46 +58,14 @@ var ctx=null;
         alert('onError!');
     }
 
-
-
-function rysuj(acceleration){
-		var c=document.getElementById("myCanvas");
-		var ctx=c.getContext("2d");
-	var dmax=60;
-	var xmax=398;
-	var ymax=398;
-		try {
-			var z=skala(acceleration.z,10);
-	    	var x=skala(acceleration.x,10);
-			var y=skala(acceleration.y,10);
-			var t=acceleration.timestamp;
-		} catch(er)
-		{
-			var z=Math.round((Math.random()*(dmax*0.8))+(dmax*0.2));
-			var x=Math.round((Math.random()*(xmax-z)));
-			var y=Math.round((Math.random()*(ymax-z)));	
-			var t=Math.random();	
-		}
-		//console.log(d+ ' ' +xlos+ ' ' +ylos);
-	ctx.fillStyle="#ffffff";
-	ctx.fillRect(0,0,xmax,ymax);	
-	ctx.fillStyle="#800000";
-	ctx.fillRect(x,y,z,z);
-	$('#test').innerHTML='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
-	
-}	
-function skala(v,s){
-	var a=((v+1)*s);
-	return Math.round(a);
-}	
     </script>
   </head>
-<body onload="onLoad()">
- 
-   
-	<canvas id="myCanvas" width="398" height="398" style="float:left; border:1px solid gray;"></canvas>
-	<div id="test"  style="float:left; margin:2px;"></div> 
-	<div id="test2" style="float:left; margin:2px;"></div> 
-	<!--p>getCurrentAcceleration</p-->	
+  <body>
+    <div id="accelerometer">Waiting for accelerometer...</div>
   </body>
 </html>
+
+
+
+
+
