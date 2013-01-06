@@ -4,25 +4,36 @@
     <title>Acceleration Example</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="kapiszon.js"></script>
     <script type="text/javascript" charset="utf-8">
-
+var ctx=null;
     // Wait for PhoneGap to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
+	
+	    function onLoad() {
+			document.addEventListener("deviceready", onDeviceReady, false);
+			onDeviceReady();
+		}
+	
+   
 
-    // PhoneGap is ready
-    //
     function onDeviceReady() {
-        navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
+		var c=document.getElementById("myCanvas");
+		ctx=c.getContext("2d");
+		//console.log('device redy');
+		var int=window.setInterval(function(){odczyt(ctx)},333);
     }
 
-    // onSuccess: Get a snapshot of the current acceleration
-    //
+	function odczyt(ctx){
+		try {navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);}
+		catch(er){rysuj(null)}
+
+	} 
+	
     function onSuccess(acceleration) {
-        alert('Acceleration X: ' + acceleration.x + '\n' +
-              'Acceleration Y: ' + acceleration.y + '\n' +
-              'Acceleration Z: ' + acceleration.z + '\n' +
-              'Timestamp: '      + acceleration.timestamp + '\n');
+		rysyj(acceleration);
+     	//alert('Acceleration X: ' + acceleration.x + '\n' +   'Acceleration Y: ' + acceleration.y + '\n' +              'Acceleration Z: ' + acceleration.z + '\n' +            'Timestamp: '      + acceleration.timestamp + '\n');
+		
     }
 
     // onError: Failed to get the acceleration
@@ -31,10 +42,41 @@
         alert('onError!');
     }
 
+
+
+function rysuj(acceleration){
+	var dmax=60;
+	var xmax=600;
+	var ymax=600;
+		try {
+			var z=skala(acceleration.z,10);
+	    	var x=skala(acceleration.x,10);
+			var y=skala(acceleration.y,10);
+			var t=acceleration.timestamp;
+		} catch(er){
+			var z=Math.round((Math.random()*(dmax*0.8))+(dmax*0.2));
+			var x=Math.round((Math.random()*(xmax-z)));
+			var y=Math.round((Math.random()*(ymax-z)));	
+			var t=Math.random();	
+		}
+		//console.log(d+ ' ' +xlos+ ' ' +ylos);
+	ctx.fillStyle="#ffffff";
+	ctx.fillRect(0,0,xmax,ymax);	
+	ctx.fillStyle="#800000";
+	ctx.fillRect(x,y,z,z);
+	$('#test').innerHTML='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+}	
+function skala(v,s){
+	var a=((v+1)*s);
+	return a;
+}	
     </script>
   </head>
-  <body>
-    <h1>Example</h1>
-    <p>getCurrentAcceleration</p>
+<body onload="onLoad()">
+ 
+   
+	<canvas id="myCanvas" width="600" height="600" style="float:left; border:solid;"></canvas>
+	<div id="test" style="float:left;"></div> 
+	<!--p>getCurrentAcceleration</p-->	
   </body>
 </html>
