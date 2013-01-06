@@ -3,7 +3,7 @@
   <head>
     <title>Acceleration Example</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
 <style>	
 body {margin:0; padding:0;}
 </style>
@@ -25,9 +25,9 @@ var ctx=null;
 		var c=document.getElementById("myCanvas");
 		ctx=c.getContext("2d");
 		//console.log('device redy');
-		//var int=window.setInterval(function(){odczyt(ctx)},1000);
-		//odczyt();
-		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
+		var int=window.setInterval(function(){odczyt(ctx)},1500);
+		odczyt();
+		
     }
 
 	function odczyt(){
