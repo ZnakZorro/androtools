@@ -47,8 +47,8 @@ var ctx=null;
 
 function rysuj(acceleration){
 	var dmax=60;
-	var xmax=300;
-	var ymax=300;
+	var xmax=400;
+	var ymax=400;
 		try {
 			var z=skala(acceleration.z,10);
 	    	var x=skala(acceleration.x,10);
@@ -77,7 +77,7 @@ function skala(v,s){
 <body onload="onLoad()">
  
    
-	<canvas id="myCanvas" width="300" height="300" style="float:left; border:solid;"></canvas>
+	<canvas id="myCanvas" width="400" height="400" style="float:left; border:solid;"></canvas>
 	<div id="test" style="float:left;"></div> 
 	<div id="test2" style="float:left;"></div> 
 	<!--p>getCurrentAcceleration</p-->	
