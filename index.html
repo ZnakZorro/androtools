@@ -15,18 +15,17 @@ var ctx=null;
     //
 	
 	    function onLoad() {
-			document.addEventListener("deviceready", onDeviceReady, false);
+			try  {document.addEventListener("deviceready", onDeviceReady, false);}
+			catch(er){onDeviceReady();}
 			onDeviceReady();
 		}
 	
    
 
     function onDeviceReady() {
-		var c=document.getElementById("myCanvas");
-		ctx=c.getContext("2d");
 		//console.log('device redy');
-		var int=window.setInterval(function(){odczyt(ctx)},1500);
-		odczyt();
+		var int=window.setInterval(function(){odczyt(ctx)},2000);
+		//odczyt();
 		
     }
 
@@ -37,9 +36,9 @@ var ctx=null;
 	} 
 	
     function onSuccess(acceleration) {
-    	$('#test2').innerHTML='<br />X: '+ acceleration.x +'<br />Y: '+ acceleration.y+'<br />Z: '+acceleration.z+'<br />T: '+ acceleration.timestamp;
+    	$('#test2').innerHTML='X: '+ acceleration.x +'<br />Y: '+ acceleration.y+'<br />Z: '+acceleration.z+'<br />T: '+ acceleration.timestamp;
 		rysyj(acceleration);
- 		
+ 		//window.setTimeout(odczyt(),700);
     }
 
     // onError: Failed to get the acceleration
@@ -51,9 +50,11 @@ var ctx=null;
 
 
 function rysuj(acceleration){
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
 	var dmax=60;
-	var xmax=400;
-	var ymax=400;
+	var xmax=398;
+	var ymax=398;
 		try {
 			var z=skala(acceleration.z,10);
 	    	var x=skala(acceleration.x,10);
@@ -72,6 +73,7 @@ function rysuj(acceleration){
 	ctx.fillStyle="#800000";
 	ctx.fillRect(x,y,z,z);
 	$('#test').innerHTML='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	
 }	
 function skala(v,s){
 	var a=((v+1)*s);
@@ -82,9 +84,9 @@ function skala(v,s){
 <body onload="onLoad()">
  
    
-	<canvas id="myCanvas" width="400" height="400" style="float:left; border:solid;"></canvas>
-	<div id="test" style="float:left;"></div> 
-	<div id="test2" style="float:left;"></div> 
+	<canvas id="myCanvas" width="398" height="398" style="float:left; border:1px solid gray;"></canvas>
+	<div id="test"  style="float:left; margin:2px;"></div> 
+	<div id="test2" style="float:left; margin:2px;"></div> 
 	<!--p>getCurrentAcceleration</p-->	
   </body>
 </html>
