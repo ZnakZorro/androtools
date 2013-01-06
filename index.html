@@ -21,7 +21,7 @@ var ctx=null;
 		var c=document.getElementById("myCanvas");
 		ctx=c.getContext("2d");
 		//console.log('device redy');
-		var int=window.setInterval(function(){odczyt(ctx)},333);
+		var int=window.setInterval(function(){odczyt(ctx)},1000);
     }
 
 	function odczyt(ctx){
@@ -46,14 +46,15 @@ var ctx=null;
 
 function rysuj(acceleration){
 	var dmax=60;
-	var xmax=600;
-	var ymax=600;
+	var xmax=300;
+	var ymax=300;
 		try {
 			var z=skala(acceleration.z,10);
 	    	var x=skala(acceleration.x,10);
 			var y=skala(acceleration.y,10);
 			var t=acceleration.timestamp;
-		} catch(er){
+		} catch(er)
+		{
 			var z=Math.round((Math.random()*(dmax*0.8))+(dmax*0.2));
 			var x=Math.round((Math.random()*(xmax-z)));
 			var y=Math.round((Math.random()*(ymax-z)));	
@@ -68,14 +69,14 @@ function rysuj(acceleration){
 }	
 function skala(v,s){
 	var a=((v+1)*s);
-	return a;
+	return Math.round(a);
 }	
     </script>
   </head>
 <body onload="onLoad()">
  
    
-	<canvas id="myCanvas" width="600" height="600" style="float:left; border:solid;"></canvas>
+	<canvas id="myCanvas" width="300" height="300" style="float:left; border:solid;"></canvas>
 	<div id="test" style="float:left;"></div> 
 	<!--p>getCurrentAcceleration</p-->	
   </body>
