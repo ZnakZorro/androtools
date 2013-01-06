@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>Acceleration Example</title>
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 	<script type="text/javascript" charset="utf-8" src="kapiszon.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -31,9 +32,9 @@ var ctx=null;
 	} 
 	
     function onSuccess(acceleration) {
+    	$('#test2').innerHTML='<br />X: '+ acceleration.x +'<br />Y: '+ acceleration.y+'<br />Z: '+acceleration.z+'<br />T: '+ acceleration.timestamp;
 		rysyj(acceleration);
-     	//alert('Acceleration X: ' + acceleration.x + '\n' +   'Acceleration Y: ' + acceleration.y + '\n' +              'Acceleration Z: ' + acceleration.z + '\n' +            'Timestamp: '      + acceleration.timestamp + '\n');
-		
+ 		
     }
 
     // onError: Failed to get the acceleration
@@ -78,6 +79,7 @@ function skala(v,s){
    
 	<canvas id="myCanvas" width="300" height="300" style="float:left; border:solid;"></canvas>
 	<div id="test" style="float:left;"></div> 
+	<div id="test2" style="float:left;"></div> 
 	<!--p>getCurrentAcceleration</p-->	
   </body>
 </html>
