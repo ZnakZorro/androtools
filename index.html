@@ -8,6 +8,7 @@
 body {margin:0; padding:0;}
 </style>
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="kapiszon.js"></script>
     <script type="text/javascript" charset="utf-8">
 
     // The watch id references the current `watchAcceleration`
@@ -15,7 +16,12 @@ body {margin:0; padding:0;}
 
     // Wait for Cordova to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
+	    function onLoad() {
+			try  {document.addEventListener("deviceready", onDeviceReady, false);}
+			catch(er){onDeviceReady();}
+			onDeviceReady();
+		}
+   
 
     // Cordova is ready
     //
@@ -27,10 +33,10 @@ body {margin:0; padding:0;}
     //
     function startWatch() {
 
-        // Update acceleration every 3 seconds
-        var options = { frequency: 3000 };
-
-        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+        // Update acceleration every 1 seconds
+        var options = { frequency: 1000 };
+	try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
+	catch(er){onSuccess(null);}
     }
 
     // Stop watching the acceleration
@@ -46,10 +52,14 @@ body {margin:0; padding:0;}
     //
     function onSuccess(acceleration) {
         var element = document.getElementById('accelerometer');
+		
+		if(acceleration){
         element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                             'Acceleration Y: ' + acceleration.y + '<br />' +
                             'Acceleration Z: ' + acceleration.z + '<br />' +
                             'Timestamp: '      + acceleration.timestamp + '<br />';
+		}
+		rysuj(acceleration);
     }
 
     // onError: Failed to get the acceleration
@@ -58,9 +68,43 @@ body {margin:0; padding:0;}
         alert('onError!');
     }
 
+function rysuj(acceleration){
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
+	var dmax=60;
+	var xmax=398;
+	var ymax=398;
+		try {
+			var z=skala(acceleration.z,20);
+	    	var x=skala(acceleration.x,20);
+			var y=skala(acceleration.y,20);
+			var t=acceleration.timestamp;
+		} catch(er)
+		{
+			var z=Math.round((Math.random()*(dmax*0.8))+(dmax*0.2));
+			var x=Math.round((Math.random()*(xmax-z)));
+			var y=Math.round((Math.random()*(ymax-z)));	
+			var t=Math.random();	
+		}
+		//console.log(d+ ' ' +xlos+ ' ' +ylos);
+	ctx.fillStyle="#ffffff";
+	ctx.fillRect(0,0,xmax,ymax);	
+	ctx.fillStyle="#800000";
+	ctx.fillRect(x,y,z,z);
+	$('#accelerometer').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	
+}	
+function skala(v,s){
+	var a=((v+1)*s);
+	return Math.round(a);
+}	
+	
+	
     </script>
   </head>
-  <body>
+<body onload="onLoad()">
+	<canvas id="myCanvas" width="398" height="398" style="float:left; border:1px solid gray;"></canvas>
+
     <div id="accelerometer">Waiting for accelerometer...</div>
   </body>
 </html>
