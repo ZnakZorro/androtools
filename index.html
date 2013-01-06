@@ -4,6 +4,9 @@
     <title>Acceleration Example</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>	
+body {margin:0; padding:0;}
+</style>
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 	<script type="text/javascript" charset="utf-8" src="kapiszon.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -22,10 +25,12 @@ var ctx=null;
 		var c=document.getElementById("myCanvas");
 		ctx=c.getContext("2d");
 		//console.log('device redy');
-		var int=window.setInterval(function(){odczyt(ctx)},1000);
+		//var int=window.setInterval(function(){odczyt(ctx)},1000);
+		//odczyt();
+		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
     }
 
-	function odczyt(ctx){
+	function odczyt(){
 		try {navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);}
 		catch(er){rysuj(null)}
 
