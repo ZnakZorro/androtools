@@ -5,7 +5,7 @@
         versionCode="10" 
         version   = "0.0.3">
 
-    <name>Zestaw andro tools</name>
+    <name>Zestaw-andro-tools</name>
 
     <description>
         Tools from android
@@ -29,4 +29,6 @@
     <gap:splash src="icon.png"  gap:platform="android" gap:density="mdpi" />
     <gap:splash src="icon.png"  gap:platform="android" gap:density="hdpi" />
     <gap:splash src="icon.png" gap:platform="android" gap:density="xhdpi" />
+	
+<preference name="splash-screen-duration" value="1000" />	
 </widget>

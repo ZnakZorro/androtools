@@ -26,6 +26,8 @@ body {margin:0; padding:0;}
     // Cordova is ready
     //
     function onDeviceReady() {
+	try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
+	catch(er){$('#test3').innerHTML='<div>PCet</div>';}
         startWatch();
     }
 
@@ -35,8 +37,9 @@ body {margin:0; padding:0;}
 
         // Update acceleration every 1 seconds
         var options = { frequency: 333 };
-	try {if (device.uuid) watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
-	catch(er){symulacja();}
+		watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+	//try {if (device.uuid) watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
+	//catch(er){symulacja();}
     }
 	
 	function symulacja(){
@@ -123,6 +126,7 @@ function skala(v,s){
 <body onload="onLoad()">
 	<canvas id="myCanvas" width="398" height="398" style="float:left; border:1px solid gray;"></canvas>
 
+    <div id="test3">...</div>
     <div id="accelerometer">Waiting for accelerometer...</div>
   </body>
 </html>
