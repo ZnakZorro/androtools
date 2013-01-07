@@ -1,4 +1,3 @@
-
 var watchID = null;
 var watchLastX=0;
 var watchLastY=0;
@@ -6,7 +5,7 @@ var watchLastZ=0;
 
 
     function startWatch() {
-        var options = { frequency: 2000 };
+        var options = { frequency: 500 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){}
 	}
@@ -29,9 +28,13 @@ var watchLastZ=0;
 			var deltaZ=acceleration.z - watchLastZ;
 			var suma=deltaY+deltaZ;
 			var sumaa=acceleration.y+acceleration.z;
-						watchLastX = acceleration.x;			watchLastY = acceleration.y;			watchLastZ = acceleration.z;			
-			$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> :x:'+acceleration.x+' :y:'+acceleration.y+' :z:'+acceleration.z+'<br /><br />';
-			$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> :x:'+deltaX+' :y:'+deltaY+' :z:'+deltaZ+'<br />';
+			
+			watchLastX = acceleration.x;
+			watchLastY = acceleration.y;
+			watchLastZ = acceleration.z;
+			
+			$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> <br />:x:'+acceleration.x+' <br />:y:'+acceleration.y+' <br />:z:'+acceleration.z+'<br />';
+			$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> <br />:x:'+deltaX+' <br />:y:'+deltaY+' <br />:z:'+deltaZ+'<br />';
 				//if (suma < -3) {goback(); return;}
 				//if (suma > 9)  {gonext(); return;}
 				//if (acceleration.y < -3) {goback(); return;}
@@ -74,8 +77,11 @@ function rysuj(acceleration){
 	
 		try {
 			var z=skala(acceleration.z,10);
-	    	var x=skala(acceleration.x,20); 				x=(x-(z/2))+pol;				x=xmax-x;
-			var y=skala(acceleration.y,20); 				y=(y-(z/2))+pol;
+	    		var x=skala(acceleration.x,20); 
+				x=(x-(z/2))+pol;
+				x=xmax-x-z;
+			var y=skala(acceleration.y,20); 
+				y=(y-(z/2))+pol;
 			var t=acceleration.timestamp;
 		} catch(er)
 		{
@@ -90,7 +96,7 @@ function rysuj(acceleration){
 	ctx.clearRect(0, 0,xmax,ymax);	
 	ctx.fillStyle="#f00000";
 	ctx.fillRect(x,y,z,z);
-	$('#accelerometer').innerHTML='<hr />x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	$('#accelerometer').innerHTML='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
 }	
 function skala(v,s){
