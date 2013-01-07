@@ -17,9 +17,9 @@ body {margin:0; padding:0;}
     // Wait for Cordova to load
     //
 	    function onLoad() {
-		//document.addEventListener("deviceready", onDeviceReady, false);
-			try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
-			catch(er){onDeviceReady();}
+			document.addEventListener("deviceready", onDeviceReady, false);
+			//try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
+			//catch(er){onDeviceReady();}
 			//onDeviceReady();
 		}
    
@@ -27,7 +27,7 @@ body {margin:0; padding:0;}
     // Cordova is ready
     //
     function onDeviceReady() {
-	try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
+	try {if (navigator.app) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
 	catch(er){$('#test3').innerHTML='<div>PCet</div>';}
         startWatch();
     }
