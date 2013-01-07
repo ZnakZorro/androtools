@@ -6,7 +6,7 @@ var watchLastZ=0;
 
 
     function startWatch() {
-        var options = { frequency: 2000 };
+        var options = { frequency: 333 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){}
 	}
@@ -30,8 +30,8 @@ var watchLastZ=0;
 			var suma=deltaY+deltaZ;
 			var sumaa=acceleration.y+acceleration.z;
 			watchLastY = acceleration.y;
-			$('#infotest').innerHTML='A :x:'+acceleration.x+' :y:'+acceleration.y+' :z:'+acceleration.z+' <b>:s:'+sumaa+'</b><br /><br />';
-			$('#infotest').innerHTML+='D :x:'+deltaX+' :y:'+deltaY+' :z:'+deltaZ+' <b>:s:'+suma+'</b><br />';
+			$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> :x:'+acceleration.x+' :y:'+acceleration.y+' :z:'+acceleration.z+'<br /><br />';
+			$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> :x:'+deltaX+' :y:'+deltaY+' :z:'+deltaZ+'<br />';
 				//if (suma < -3) {goback(); return;}
 				//if (suma > 9)  {gonext(); return;}
 				//if (acceleration.y < -3) {goback(); return;}
@@ -74,8 +74,8 @@ function rysuj(acceleration){
 	
 		try {
 			var z=skala(acceleration.z,10);
-	    	var x=skala(acceleration.x,20); x=(x-(z/2))+pol;
-			var y=skala(acceleration.y,20); y=(y-(z/2))+pol;
+	    	var x=skala(acceleration.x,20); 				x=(x-(z/2))+pol;				x=xmax-x;
+			var y=skala(acceleration.y,20); 				y=(y-(z/2))+pol;
 			var t=acceleration.timestamp;
 		} catch(er)
 		{
