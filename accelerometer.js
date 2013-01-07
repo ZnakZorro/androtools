@@ -96,7 +96,7 @@ function rysuj(acceleration){
 	ctx.clearRect(0, 0,xmax,ymax);	
 	ctx.fillStyle="#f00000";
 	ctx.fillRect(x,y,z,z);
-	$('#accelerometer').innerHTML='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
 }	
 function skala(v,s){
