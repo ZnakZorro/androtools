@@ -15,9 +15,13 @@ button {padding:10px 20px;}
 	<script type="text/javascript" charset="utf-8">
 
 	function onLoad() {
+	
         document.addEventListener("deviceready", onDeviceReady, false);
 		try {if (device.uuid) {document.getElementById('infotest').innerHTML=device.platform+'<br />'+device.uuid;}	}
-		catch(err) {onDeviceReady();}
+		catch(err) {
+			onDeviceReady();
+			//symulacja();
+			}
 	}
    
 
