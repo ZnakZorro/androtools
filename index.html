@@ -17,8 +17,9 @@ body {margin:0; padding:0;}
     // Wait for Cordova to load
     //
 	    function onLoad() {
-			try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
-			catch(er){onDeviceReady();}
+		document.addEventListener("deviceready", onDeviceReady, false);
+			//try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
+			//catch(er){onDeviceReady();}
 			//onDeviceReady();
 		}
    
@@ -26,8 +27,8 @@ body {margin:0; padding:0;}
     // Cordova is ready
     //
     function onDeviceReady() {
-	try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
-	catch(er){$('#test3').innerHTML='<div>PCet</div>';}
+	//try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
+	//catch(er){$('#test3').innerHTML='<div>PCet</div>';}
         startWatch();
     }
 
@@ -68,7 +69,7 @@ body {margin:0; padding:0;}
     function onSuccess(acceleration) {
         var element = document.getElementById('accelerometer');
 		
-		if(acceleration){
+		if (acceleration){
         element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
                             'Acceleration Y: ' + acceleration.y + '<br />' +
                             'Acceleration Z: ' + acceleration.z + '<br />' +
