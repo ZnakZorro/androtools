@@ -29,7 +29,7 @@ var watchLastZ=0;
 			var deltaZ=acceleration.z - watchLastZ;
 			var suma=deltaY+deltaZ;
 			var sumaa=acceleration.y+acceleration.z;
-			watchLastY = acceleration.y;
+						watchLastX = acceleration.x;			watchLastY = acceleration.y;			watchLastZ = acceleration.z;			
 			$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> :x:'+acceleration.x+' :y:'+acceleration.y+' :z:'+acceleration.z+'<br /><br />';
 			$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> :x:'+deltaX+' :y:'+deltaY+' :z:'+deltaZ+'<br />';
 				//if (suma < -3) {goback(); return;}
