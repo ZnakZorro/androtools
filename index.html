@@ -78,8 +78,8 @@ function rysuj(acceleration){
 	
 		try {
 			var z=skala(acceleration.z,10);
-	    	var x=skala(acceleration.x,20); x=xmax-((x-z/2)-pol);
-			var y=skala(acceleration.y,20); y=(y-z/2)-pol;
+	    	var x=skala(acceleration.x,20); x=xmax-((x-(z/2))+pol);
+			var y=skala(acceleration.y,20); y=(y-(z/2))+pol;
 			var t=acceleration.timestamp;
 		} catch(er)
 		{
@@ -97,7 +97,7 @@ function rysuj(acceleration){
 	
 }	
 function skala(v,s){
-	var a=((v+1)*s);
+	var a=((v)*s);
 	return Math.round(a);
 }	
 	
