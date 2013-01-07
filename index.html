@@ -34,7 +34,7 @@ body {margin:0; padding:0;}
     function startWatch() {
 
         // Update acceleration every 1 seconds
-        var options = { frequency: 1000 };
+        var options = { frequency: 333 };
 	try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 	catch(er){onSuccess(null);}
     }
@@ -74,10 +74,12 @@ function rysuj(acceleration){
 	var dmax=60;
 	var xmax=398;
 	var ymax=398;
+	var pol=200;
+	
 		try {
-			var z=skala(acceleration.z,20);
-	    	var x=skala(acceleration.x,20);
-			var y=skala(acceleration.y,20);
+			var z=skala(acceleration.z,10);
+	    	var x=skala(acceleration.x,20); x=(x-z/2)+pol;
+			var y=skala(acceleration.y,20); y=(y-z/2)+pol;
 			var t=acceleration.timestamp;
 		} catch(er)
 		{
