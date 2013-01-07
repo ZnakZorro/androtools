@@ -6,7 +6,7 @@ var watchLastZ=0;
 
 
     function startWatch() {
-        var options = { frequency: 333 };
+        var options = { frequency: 2000 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){}
 	}
