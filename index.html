@@ -17,9 +17,9 @@ body {margin:0; padding:0;}
     // Wait for Cordova to load
     //
 	    function onLoad() {
-			try  {document.addEventListener("deviceready", onDeviceReady, false);}
+			try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
 			catch(er){onDeviceReady();}
-			onDeviceReady();
+			//onDeviceReady();
 		}
    
 
@@ -36,7 +36,7 @@ body {margin:0; padding:0;}
         // Update acceleration every 1 seconds
         var options = { frequency: 333 };
 	try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
-	catch(er){symulacja(); onSuccess(null);}
+	catch(er){symulacja();}
     }
 	
 	function symulacja(){
