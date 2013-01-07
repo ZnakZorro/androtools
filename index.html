@@ -35,7 +35,7 @@ body {margin:0; padding:0;}
 
         // Update acceleration every 1 seconds
         var options = { frequency: 333 };
-	try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
+	try {if (device.uuid) watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 	catch(er){symulacja();}
     }
 	
