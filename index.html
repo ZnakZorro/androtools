@@ -32,15 +32,18 @@ body {margin:0; padding:0;}
         startWatch();
     }
 
-    // Start watching the acceleration
-    //
     function startWatch() {
+        var options = { frequency: 2000 };
+		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
+		catch(er){}
+    }
 
-        // Update acceleration every 1 seconds
-        var options = { frequency: 333 };
-		watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
-	//try {if (device.uuid) watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
-	//catch(er){symulacja();}
+    // Stop watching the acceleration
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
     }
 	
 	function symulacja(){
@@ -55,14 +58,6 @@ body {margin:0; padding:0;}
 			return acceleration;
 		},333);
 	}
-    // Stop watching the acceleration
-    //
-    function stopWatch() {
-        if (watchID) {
-            navigator.accelerometer.clearWatch(watchID);
-            watchID = null;
-        }
-    }
 
     // onSuccess: Get a snapshot of the current acceleration
     //
