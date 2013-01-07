@@ -104,8 +104,9 @@ function rysuj(acceleration){
 			var t=Math.random();	
 		}
 		//console.log(d+ ' ' +xlos+ ' ' +ylos);
-	ctx.fillStyle="#ffffff";
-	ctx.fillRect(0,0,xmax,ymax);	
+	//ctx.fillStyle="#ffffff";
+	//ctx.fillRect(0,0,xmax,ymax);
+	ctx.clearRect(0, 0,xmax,ymax);	
 	ctx.fillStyle="#f00000";
 	ctx.fillRect(x,y,z,z);
 	$('#accelerometer').innerHTML+='<hr />x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
