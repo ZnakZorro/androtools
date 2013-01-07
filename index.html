@@ -27,8 +27,8 @@ body {margin:0; padding:0;}
     // Cordova is ready
     //
     function onDeviceReady() {
-	try {if (navigator.app) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
-	catch(er){$('#test3').innerHTML='<div>PCet</div>';}
+	//try {if (navigator.app) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
+	//catch(er){$('#test3').innerHTML='<div>PCet</div>';}
         startWatch();
     }
 
@@ -129,6 +129,9 @@ function skala(v,s){
 
     <div id="test3">...</div>
     <div id="accelerometer">Waiting for accelerometer...</div>
+	<button onClick="koniec()">Koniec</button>
+	<button onClick="stopWatch()">Stop</button>
+	<button onClick="startWatch()">Start</button>
   </body>
 </html>
 

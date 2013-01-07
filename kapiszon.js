@@ -40,7 +40,10 @@ function zgas() {$("#strona").style.opacity='0.7';}
 	
 	
 function koniec(){
-	try  {navigator.app.exitApp();}
+	try  {
+	stopWatch();
+	navigator.app.exitApp();
+	}
 	catch(err) {
 	  //window.scrollTo(0,0);
 	  }
