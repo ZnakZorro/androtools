@@ -17,9 +17,9 @@ body {margin:0; padding:0;}
     // Wait for Cordova to load
     //
 	    function onLoad() {
-		document.addEventListener("deviceready", onDeviceReady, false);
-			//try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
-			//catch(er){onDeviceReady();}
+		//document.addEventListener("deviceready", onDeviceReady, false);
+			try  {if (device.uuid) document.addEventListener("deviceready", onDeviceReady, false);}
+			catch(er){onDeviceReady();}
 			//onDeviceReady();
 		}
    
@@ -27,8 +27,8 @@ body {margin:0; padding:0;}
     // Cordova is ready
     //
     function onDeviceReady() {
-	//try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
-	//catch(er){$('#test3').innerHTML='<div>PCet</div>';}
+	try {if (device.uuid) $('#test3').innerHTML='<div>'+device.uuid+'</div>';}
+	catch(er){$('#test3').innerHTML='<div>PCet</div>';}
         startWatch();
     }
 
@@ -98,7 +98,7 @@ function rysuj(acceleration){
 	
 		try {
 			var z=skala(acceleration.z,10);
-	    	var x=skala(acceleration.x,20); x=xmax-((x-(z/2))+pol);
+	    	var x=skala(acceleration.x,20); x=xmax-((x-(z/2))-pol);
 			var y=skala(acceleration.y,20); y=(y-(z/2))+pol;
 			var t=acceleration.timestamp;
 		} catch(er)
@@ -111,7 +111,7 @@ function rysuj(acceleration){
 		//console.log(d+ ' ' +xlos+ ' ' +ylos);
 	ctx.fillStyle="#ffffff";
 	ctx.fillRect(0,0,xmax,ymax);	
-	ctx.fillStyle="#800000";
+	ctx.fillStyle="#f00000";
 	ctx.fillRect(x,y,z,z);
 	$('#accelerometer').innerHTML+='<hr />x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
