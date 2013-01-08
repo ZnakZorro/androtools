@@ -10,7 +10,7 @@ var LastT=0;
 
 
     function startWatch() {
-        var options = { frequency: 100 };
+        var options = { frequency: 50 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){
 		//symulacja()
@@ -40,8 +40,8 @@ var LastT=0;
 			watchLastY = acceleration.y;
 			watchLastZ = acceleration.z;
 			
-			$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> <br />:x:'+acceleration.x+' <br />:y:'+acceleration.y+' <br />:z:'+acceleration.z+'<br />';
-			$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> <br />:x:'+deltaX+' <br />:y:'+deltaY+' <br />:z:'+deltaZ+'<br />';
+			//$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> <br />:x:'+acceleration.x+' <br />:y:'+acceleration.y+' <br />:z:'+acceleration.z+'<br />';
+			//$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> <br />:x:'+deltaX+' <br />:y:'+deltaY+' <br />:z:'+deltaZ+'<br />';
 				//if (suma < -3) {goback(); return;}
 				//if (suma > 9)  {gonext(); return;}
 				//if (acceleration.y < -3) {goback(); return;}
@@ -112,7 +112,7 @@ function rysuj(acceleration){
 	ctx.fillRect(0,0,xmax,ymax);
 	ctx.fillStyle="rgba(0,0,255,0.3)";
 	ctx.fillRect(x,y,z,z);
-	$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	//$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
 }	
 function skala(v,s){
