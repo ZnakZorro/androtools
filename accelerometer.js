@@ -77,7 +77,7 @@ function rysuj(acceleration){
 	
 		try {
 			var z=skala(acceleration.z,10);
-	    		var x=skala(acceleration.x,20); 
+	    	var x=skala(acceleration.x,20); 
 				x=(x-(z/2))+pol;
 				x=xmax-x-z;
 			var y=skala(acceleration.y,20); 
@@ -112,7 +112,14 @@ function skala(v,s){
 function goback(){alert('back')};
 function gonext(){alert('next')};
  
-
+ 
+//phonegap 
+    function playBeep() {
+        navigator.notification.beep(1);
+    }
+    function vibrate() {
+        navigator.notification.vibrate(200);
+    }
  
  
  
