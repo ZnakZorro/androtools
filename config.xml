@@ -30,5 +30,5 @@
     <gap:splash src="icon.png"  gap:platform="android" gap:density="hdpi" />
     <gap:splash src="icon.png" gap:platform="android" gap:density="xhdpi" />
 	
-<preference name="splash-screen-duration" value="1000" />	
+<preference name="splash-screen-duration" value="3000" />	
 </widget>
