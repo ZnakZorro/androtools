@@ -3,11 +3,16 @@ var watchLastX=0;
 var watchLastY=0;
 var watchLastZ=0;
 
+var LastX=Math.random();
+var LastY=Math.random();
+var LastZ=Math.random();
+var LastT=0;
+
 
     function startWatch() {
         var options = { frequency: 100 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
-		catch(er){}
+		catch(er){symulacja()}
 	}
 		
 
@@ -56,19 +61,25 @@ var watchLastZ=0;
 	function symulacja(){
 	var it=window.setInterval(function(){
 			var acceleration={};
-			acceleration.x=(Math.random()*20)-10;
-			acceleration.y=(Math.random()*20)-10;
-			acceleration.z=(Math.random()*10);
+			
+			acceleration.x=LastX+(Math.random()); if (acceleration.x>9.81) acceleration.x=-9.81; LastX=acceleration.x;
+			acceleration.y=LastY+(Math.random()); if (acceleration.y>9.81) acceleration.y=-9.81; LastY=acceleration.y;
+			acceleration.z=LastZ+(Math.random()); if (acceleration.z>9.81) acceleration.z=-9.81; LastZ=acceleration.z;
+			
+			//acceleration.x=(Math.random()*20)-10;
+			//acceleration.y=(Math.random()*20)-10;
+			//acceleration.z=(Math.random()*10);
 			acceleration.timestamp=111111;
 			//console.log(acceleration);
 			onSuccess(acceleration);
 			return acceleration;
 		},333);
 	}
+
  	
 function rysuj(acceleration){
-		var c=document.getElementById("myCanvas");
-		var ctx=c.getContext("2d");
+		//var c=document.getElementById("myCanvas");
+		//var ctx=c.getContext("2d");
 
 	var dmax=60;
 	var xmax=398;
@@ -92,8 +103,12 @@ function rysuj(acceleration){
 		}
 		//console.log(d+ ' ' +xlos+ ' ' +ylos);
 
-	ctx.clearRect(0, 0,xmax,ymax);	
-	ctx.fillStyle="#ffa000";
+	//ctx.clearRect(0, 0,xmax,ymax);	
+	//ctx.fillStyle="#ffa000";
+	//ctx.fillRect(x,y,z,z);
+	ctx.fillStyle="rgba(255,255,255,0.1)";
+	ctx.fillRect(0,0,xmax,ymax);
+	ctx.fillStyle="rgba(0,0,255,0.3)";
 	ctx.fillRect(x,y,z,z);
 	$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
