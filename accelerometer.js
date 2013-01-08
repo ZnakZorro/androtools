@@ -5,7 +5,7 @@ var watchLastZ=0;
 
 
     function startWatch() {
-        var options = { frequency: 500 };
+        var options = { frequency: 100 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){}
 	}
@@ -91,10 +91,9 @@ function rysuj(acceleration){
 			var t=Math.random();	
 		}
 		//console.log(d+ ' ' +xlos+ ' ' +ylos);
-	//ctx.fillStyle="#ffffff";
-	//ctx.fillRect(0,0,xmax,ymax);
+
 	ctx.clearRect(0, 0,xmax,ymax);	
-	ctx.fillStyle="#f00000";
+	ctx.fillStyle="#ffa000";
 	ctx.fillRect(x,y,z,z);
 	$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
 	
