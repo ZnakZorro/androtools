@@ -9,6 +9,8 @@ var LastY=0;
 var LastZ=0;
 var LastT=0;
 
+var SumaDelt=0;
+
 var startSymul=false;
 
     function startWatch() {
@@ -42,6 +44,8 @@ var startSymul=false;
 			var suma=deltaX+deltaY+deltaZ;
 			var sumaa=acceleration.x+acceleration.y+acceleration.z;
 			if (suma > 3) {	moveCounter++;} else {moveCounter = Math.max(0, --moveCounter);}		
+			
+			SumaDelt=suma;
 			
 			watchLastX = acceleration.x;
 			watchLastY = acceleration.y;
@@ -127,7 +131,7 @@ function rysuj(acceleration){
 
 	ctx.fillStyle="rgba(255,0,0,0.3)";
 	x=moveCounter*10;
-	ctx.fillRect(x,x,10,10);
+	ctx.fillRect(x,0,SumaDelt,SumaDelt);
 	
 	
 	
