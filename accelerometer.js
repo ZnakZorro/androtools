@@ -14,7 +14,7 @@ var LastT=0;
         var options = { frequency: 100 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){
-		if (watchID == null) symulacja();
+		//if (watchID == null) symulacja();
 		}
 	}
 		
