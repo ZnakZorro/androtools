@@ -2,18 +2,19 @@ var watchID = null;
 var watchLastX=0;
 var watchLastY=0;
 var watchLastZ=0;
+var moveCounter=0;
 
-var LastX=Math.random();
-var LastY=Math.random();
-var LastZ=Math.random();
+var LastX=0;
+var LastY=0;
+var LastZ=0;
 var LastT=0;
 
 
     function startWatch() {
-        var options = { frequency: 50 };
+        var options = { frequency: 100 };
 		try {watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);}
 		catch(er){
-		//symulacja()
+		symulacja();
 		}
 	}
 		
@@ -30,18 +31,22 @@ var LastT=0;
     // onSuccess: Get a snapshot of the current acceleration
     function onSuccess(acceleration) {
 		if (acceleration){
-			var deltaX=acceleration.x - watchLastX;
-			var deltaY=acceleration.y - watchLastY;
-			var deltaZ=acceleration.z - watchLastZ;
-			var suma=deltaY+deltaZ;
-			var sumaa=acceleration.y+acceleration.z;
+
+		
+			var deltaX=Math.abs(acceleration.x - watchLastX);
+			var deltaY=Math.abs(acceleration.y - watchLastY);
+			var deltaZ=Math.abs(acceleration.z - watchLastZ);
+			var suma=deltaX+deltaY+deltaZ;
+			var sumaa=acceleration.x+acceleration.y+acceleration.z;
+			if (suma > 3) {	moveCounter++;} else {moveCounter = Math.max(0, --moveCounter);}		
 			
 			watchLastX = acceleration.x;
 			watchLastY = acceleration.y;
 			watchLastZ = acceleration.z;
 			
-			//$('#infotest').innerHTML='<b>A:s:'+sumaa+'</b> <br />:x:'+acceleration.x+' <br />:y:'+acceleration.y+' <br />:z:'+acceleration.z+'<br />';
-			//$('#infotest').innerHTML+=' <b>D:s:'+suma+'</b> <br />:x:'+deltaX+' <br />:y:'+deltaY+' <br />:z:'+deltaZ+'<br />';
+			$('#infotest').innerHTML='<b>'+moveCounter+'</b><br />';
+			$('#infotest').innerHTML+=' <b>D:s:'+r(suma)+'</b> <br />X:'+r(deltaX)+' <br />Y:'+r(deltaY)+' <br />Z:'+r(deltaZ)+'<br />';
+			$('#infotest').innerHTML+='<b>A:s:'+r(sumaa)+'</b> <br />x:'+r(acceleration.x)+' <br />y:'+r(acceleration.y)+' <br />z:'+r(acceleration.z)+'<br />';
 				//if (suma < -3) {goback(); return;}
 				//if (suma > 9)  {gonext(); return;}
 				//if (acceleration.y < -3) {goback(); return;}
@@ -54,6 +59,10 @@ var LastT=0;
 		}
     }
 
+	function r(v){
+		return Math.round(v*100);
+	}
+	
     function onError() {
         //alert('onError!');
 		}
@@ -112,7 +121,7 @@ function rysuj(acceleration){
 	ctx.fillRect(0,0,xmax,ymax);
 	ctx.fillStyle="rgba(0,0,255,0.3)";
 	ctx.fillRect(x,y,z,z);
-	//$('#infotest').innerHTML+='x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t;
+	$('#infotest').innerHTML+='<p>x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t+'</p>';
 	
 }	
 function skala(v,s){
