@@ -121,6 +121,13 @@ function rysuj(acceleration){
 	ctx.fillRect(0,0,xmax,ymax);
 	ctx.fillStyle="rgba(0,0,255,0.3)";
 	ctx.fillRect(x,y,z,z);
+
+	ctx.fillStyle="rgba(255,0,0,0.3)";
+	x=moveCounter*10;
+	ctx.fillRect(x,x,10,10);
+	
+	
+	
 	$('#infotest').innerHTML+='<p>x='+x+'<br />'+'y='+y+'<br />'+'z='+z+'<br />'+'t='+t+'</p>';
 	
 }	
